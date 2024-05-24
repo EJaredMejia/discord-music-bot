@@ -2,6 +2,8 @@ import * as dotenv from "dotenv";
 import Discord from "discord.js";
 import { DisTube } from "distube";
 import { printQueue, verfiyQueue, printHelp } from "./functions";
+import { SpotifyPlugin } from "@distube/spotify";
+import { SoundCloudPlugin } from "@distube/soundcloud";
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ const distube = new DisTube(client, {
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
   emitAddListWhenCreatingQueue: false,
+  plugins: [new SpotifyPlugin(), new SoundCloudPlugin()],
 });
 
 client.on("messageCreate", async (message) => {
@@ -48,7 +51,7 @@ client.on("messageCreate", async (message) => {
       console.log("playing song");
       console.log(args);
       if (args.join(" ") === "") {
-        throw new Error("Empty text is no a valid song");
+        throw new Error("Empty text is not a valid song");
       }
 
       await distube.play(message.member?.voice.channel, args.join(" "), {
@@ -61,8 +64,6 @@ client.on("messageCreate", async (message) => {
     }
 
     if (command === "skip") {
-      console.log("skipping song");
-
       const queue = await distube.getQueue(message);
       //@ts-ignore
       verfiyQueue(queue);
@@ -138,7 +139,6 @@ distube.on("initQueue", (queue) => {
 
 distube.on("playSong", (queue, song) => {
   try {
-    //@ts-expect-error
     queue.textChannel?.send("now playing: " + song.name);
   } catch (error) {
     console.log(error);
@@ -147,7 +147,6 @@ distube.on("playSong", (queue, song) => {
 
 distube.on("addSong", (queue, song) => {
   try {
-    //@ts-expect-error
     queue.textChannel?.send("added to queue: " + song.name);
   } catch (error) {
     console.log(error);
@@ -162,6 +161,10 @@ distube.on("addList", (queue, playlist) =>
     } songs) to queue\n${printQueue(queue)}`
   )
 );
+
+client.on("error", (e) => {
+  console.log(e);
+});
 
 client.login(process.env.DISCORD_TOKEN).then(() => {
   console.log("running");
