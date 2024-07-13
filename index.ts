@@ -1,9 +1,8 @@
-import * as dotenv from "dotenv";
+import { YouTubePlugin } from "@distube/youtube";
 import Discord from "discord.js";
-import { DisTube } from "distube";
-import { printQueue, verfiyQueue, printHelp } from "./functions";
-import { SpotifyPlugin } from "@distube/spotify";
-import { SoundCloudPlugin } from "@distube/soundcloud";
+import { DisTube, Events } from "distube";
+import * as dotenv from "dotenv";
+import { printHelp, printQueue, verfiyQueue } from "./functions";
 
 dotenv.config();
 
@@ -16,12 +15,11 @@ const client = new Discord.Client({
   ],
 });
 
+const youtubePlugin = new YouTubePlugin();
+
 const distube = new DisTube(client, {
-  leaveOnStop: false,
   emitNewSongOnly: true,
-  emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
-  plugins: [new SpotifyPlugin(), new SoundCloudPlugin()],
+  plugins: [youtubePlugin],
 });
 
 client.on("messageCreate", async (message) => {
@@ -46,7 +44,6 @@ client.on("messageCreate", async (message) => {
     if (!message.member?.voice.channel) {
       throw new Error(`${message.author.username} is not on a voice channel`);
     }
-
     if (command === "play" || command === "p") {
       console.log("playing song");
       console.log(args);
@@ -55,10 +52,8 @@ client.on("messageCreate", async (message) => {
       }
 
       await distube.play(message.member?.voice.channel, args.join(" "), {
-        member: message.member,
-        //@ts-ignore
-        textChannel: message.channel,
         message,
+        member: message.member,
       });
       return;
     }
@@ -133,11 +128,15 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-distube.on("initQueue", (queue) => {
+client.on("voiceStateUpdate", (e) => {
+  console.log({ e });
+});
+
+distube.on(Events.INIT_QUEUE, (queue) => {
   queue.volume = 100;
 });
 
-distube.on("playSong", (queue, song) => {
+distube.on(Events.PLAY_SONG, (queue, song) => {
   try {
     queue.textChannel?.send("now playing: " + song.name);
   } catch (error) {
@@ -145,7 +144,7 @@ distube.on("playSong", (queue, song) => {
   }
 });
 
-distube.on("addSong", (queue, song) => {
+distube.on(Events.ADD_SONG, (queue, song) => {
   try {
     queue.textChannel?.send("added to queue: " + song.name);
   } catch (error) {
@@ -153,7 +152,7 @@ distube.on("addSong", (queue, song) => {
   }
 });
 
-distube.on("addList", (queue, playlist) =>
+distube.on(Events.ADD_LIST, (queue, playlist) =>
   //@ts-ignore
   queue.textChannel?.send(
     `Added \`${playlist.name}\` playlist (${
