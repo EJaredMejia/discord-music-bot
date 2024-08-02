@@ -128,8 +128,8 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-client.on("voiceStateUpdate", (e) => {
-  console.log({ e });
+client.on("voiceStateUpdate", (stateUpdate) => {
+  console.log({ stateUpdate });
 });
 
 distube.on(Events.INIT_QUEUE, (queue) => {
