@@ -128,9 +128,9 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-client.on("voiceStateUpdate", (stateUpdate) => {
-  console.log({ stateUpdate });
-});
+// client.on("voiceStateUpdate", (stateUpdate) => {
+//   console.log({ stateUpdate });
+// });
 
 distube.on(Events.INIT_QUEUE, (queue) => {
   queue.volume = 100;
