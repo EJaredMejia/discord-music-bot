@@ -3,6 +3,10 @@ import Discord from "discord.js";
 import { DisTube, Events } from "distube";
 import * as dotenv from "dotenv";
 import { printHelp, printQueue, verfiyQueue } from "./functions";
+import { DirectLinkPlugin } from "@distube/direct-link";
+import SoundCloudPlugin from "@distube/soundcloud";
+import SpotifyPlugin from "@distube/spotify";
+import { YtDlpPlugin } from "@distube/yt-dlp";
 
 dotenv.config();
 
@@ -15,11 +19,15 @@ const client = new Discord.Client({
   ],
 });
 
-const youtubePlugin = new YouTubePlugin();
-
 const distube = new DisTube(client, {
   emitNewSongOnly: true,
-  plugins: [youtubePlugin],
+  plugins: [
+    new YouTubePlugin(),
+    new DirectLinkPlugin(),
+    new SoundCloudPlugin(),
+    new SpotifyPlugin(),
+    new YtDlpPlugin({ update: true })
+  ],
 });
 
 client.on("messageCreate", async (message) => {

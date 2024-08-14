@@ -18,14 +18,14 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))
       '@distube/soundcloud':
-        specifier: ^2.0.2
+        specifier: ^2.0.3
         version: 2.0.3(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))
       '@distube/spotify':
         specifier: ^2.0.2
         version: 2.0.2(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))
       '@distube/youtube':
-        specifier: ^1.0.2
-        version: 1.0.2(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))
+        specifier: ^1.0.4
+        version: 1.0.4(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))
       '@distube/yt-dlp':
         specifier: ^2.0.1
         version: 2.0.1(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))
@@ -45,8 +45,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0
       libsodium-wrappers:
-        specifier: ^0.7.14
-        version: 0.7.14
+        specifier: ^0.7.15
+        version: 0.7.15
       sodium-native:
         specifier: ^4.1.1
         version: 4.1.1
@@ -122,8 +122,8 @@ packages:
     peerDependencies:
       distube: '5'
 
-  '@distube/youtube@1.0.2':
-    resolution: {integrity: sha512-vNOE7kGhg3pC87iqT3Q4eu+yTae8Nr3J1XDR67YMH9HAg1RsPjwM7TvfabZoGxIUiPl4ua/PG6s8Nfxf2U9cxQ==}
+  '@distube/youtube@1.0.4':
+    resolution: {integrity: sha512-7iQbtLSv4kpgiX2XtP28CB3z2kgaxw6F8+jNu1RztnW7ckPK3N/8Ayl1yh41YpbrRIHbNMzIVTwguYG0s2ZOuA==}
     peerDependencies:
       distube: '5'
 
@@ -578,11 +578,11 @@ packages:
   json-parse-better-errors@1.0.2:
     resolution: {integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==}
 
-  libsodium-wrappers@0.7.14:
-    resolution: {integrity: sha512-300TtsePizhJZ7HjLmWr6hLHAgJUxIGhapSw+EwfCtDuWaEmEdGXSQv6j6qFw0bs9l4vS2NH9BtOHfXAq6h5kQ==}
+  libsodium-wrappers@0.7.15:
+    resolution: {integrity: sha512-E4anqJQwcfiC6+Yrl01C1m8p99wEhLmJSs0VQqST66SbQXXBoaJY0pF4BNjRYa/sOQAxx6lXAaAFIlx+15tXJQ==}
 
-  libsodium@0.7.14:
-    resolution: {integrity: sha512-/pOd7eO6oZrfORquRTC4284OUJFcMi8F3Vnc9xtRBT0teLfOUxWIItaBFF3odYjZ7nlJNwnLdUVEUFHxVyX/Sw==}
+  libsodium@0.7.15:
+    resolution: {integrity: sha512-sZwRknt/tUpE2AwzHq3jEyUU5uvIZHtSssktXq7owd++3CSgn8RGrv6UZJJBpP7+iBghBqe7Z06/2M31rI2NKw==}
 
   load-json-file@4.0.0:
     resolution: {integrity: sha512-Kx8hMakjX03tiGTLAIdJ+lL0htKnXjEZN6hk/tozf/WOuYGdZBJrZ+rCJRbVCugsjB3jMLn9746NsQIf5VjBMw==}
@@ -1160,7 +1160,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@distube/youtube@1.0.2(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))':
+  '@distube/youtube@1.0.4(distube@5.0.2(@discordjs/voice@0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0))(discord.js@14.15.3))':
     dependencies:
       '@distube/ytdl-core': 4.14.4
       '@distube/ytpl': 1.2.1
@@ -1698,11 +1698,11 @@ snapshots:
 
   json-parse-better-errors@1.0.2: {}
 
-  libsodium-wrappers@0.7.14:
+  libsodium-wrappers@0.7.15:
     dependencies:
-      libsodium: 0.7.14
+      libsodium: 0.7.15
 
-  libsodium@0.7.14: {}
+  libsodium@0.7.15: {}
 
   load-json-file@4.0.0:
     dependencies:
