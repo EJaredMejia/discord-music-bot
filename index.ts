@@ -33,8 +33,6 @@ const distube = new DisTube(client, {
 
 distube.on(Events.DEBUG, console.log);
 
-distube.on(Events.FFMPEG_DEBUG, console.log);
-
 client.on("messageCreate", async (message) => {
   try {
     if (message.author.bot || !message.guild) return;
