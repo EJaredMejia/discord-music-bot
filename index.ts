@@ -1,12 +1,12 @@
-import { YouTubePlugin } from "@distube/youtube";
-import Discord from "discord.js";
-import { DisTube, Events } from "distube";
-import * as dotenv from "dotenv";
-import { printHelp, printQueue, verfiyQueue } from "./functions";
 import { DirectLinkPlugin } from "@distube/direct-link";
 import SoundCloudPlugin from "@distube/soundcloud";
 import SpotifyPlugin from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
+import Discord from "discord.js";
+import { DisTube, Events } from "distube";
+import * as dotenv from "dotenv";
+import { printHelp, printQueue, verifiyQueue } from "./functions";
+import { YouTubePlugin } from "@distube/youtube";
 
 dotenv.config();
 
@@ -20,15 +20,20 @@ const client = new Discord.Client({
 });
 
 const distube = new DisTube(client, {
-  emitNewSongOnly: true,
   plugins: [
-    new YouTubePlugin(),
     new DirectLinkPlugin(),
-    new SoundCloudPlugin(),
+    new YtDlpPlugin({ update: true }),
     new SpotifyPlugin(),
-    new YtDlpPlugin({ update: true })
+    // TODO fix this
+    new YouTubePlugin(),
+    new SoundCloudPlugin(),
   ],
+  nsfw: true,
 });
+
+distube.on(Events.DEBUG, console.log);
+
+distube.on(Events.FFMPEG_DEBUG, console.log);
 
 client.on("messageCreate", async (message) => {
   try {
@@ -55,6 +60,7 @@ client.on("messageCreate", async (message) => {
     if (command === "play" || command === "p") {
       console.log("playing song");
       console.log(args);
+
       if (args.join(" ") === "") {
         throw new Error("Empty text is not a valid song");
       }
@@ -68,13 +74,14 @@ client.on("messageCreate", async (message) => {
 
     if (command === "skip") {
       const queue = await distube.getQueue(message);
-      //@ts-ignore
-      verfiyQueue(queue);
+      verifiyQueue(queue);
 
       //@ts-ignore
       if (queue?.songs.length <= 1) {
-        //@ts-ignore
-        throw new Error("Error: there is only one or none songs on the queue");
+        await distube.stop(message);
+        await message.channel.send("No more songs on queue");
+
+        return;
       }
 
       await distube.skip(message);
@@ -97,9 +104,10 @@ client.on("messageCreate", async (message) => {
 
     if (command === "stop") {
       const queue = await distube.getQueue(message);
-      //@ts-ignore
-      verfiyQueue(queue);
+      verifiyQueue(queue);
+
       await distube.stop(message);
+
       //@ts-ignore
       message.channel.send("Stopped the music!");
       return;
@@ -114,16 +122,16 @@ client.on("messageCreate", async (message) => {
 
     if (command === "resume") {
       const queue = await distube.getQueue(message);
-      //@ts-ignore
-      verfiyQueue(queue);
+      verifiyQueue(queue);
+
       await distube.resume(message);
       return;
     }
 
     if (command === "pause") {
       const queue = await distube.getQueue(message);
-      //@ts-ignore
-      verfiyQueue(queue);
+      verifiyQueue(queue);
+
       await distube.pause(message);
       return;
     }
@@ -131,14 +139,15 @@ client.on("messageCreate", async (message) => {
     //@ts-ignore
     await message.channel.send("Invalid command");
   } catch (error) {
+    console.log(error);
     //@ts-expect-error
     await message.channel.send(error.message);
   }
 });
 
-// client.on("voiceStateUpdate", (stateUpdate) => {
-//   console.log({ stateUpdate });
-// });
+distube.on(Events.ERROR, (error) => {
+  console.log(error);
+});
 
 distube.on(Events.INIT_QUEUE, (queue) => {
   queue.volume = 100;

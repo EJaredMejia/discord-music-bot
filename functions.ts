@@ -1,10 +1,10 @@
 import { Queue } from "distube";
 
-export const verfiyQueue = (queue: Queue) => {
+export function verifiyQueue(queue: Queue | undefined) {
   if (!queue) {
     throw new Error("There is no song playing");
   }
-};
+}
 
 export const printQueue = (queue: Queue) => {
   return `Current queue:\n${queue.songs
