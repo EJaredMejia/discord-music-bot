@@ -7,6 +7,7 @@ import { DisTube, Events } from "distube";
 import * as dotenv from "dotenv";
 import { printHelp, printQueue, verifiyQueue } from "./functions";
 import { YouTubePlugin } from "@distube/youtube";
+import { COMMANDS } from "./const/commands";
 
 dotenv.config();
 
@@ -22,11 +23,11 @@ const client = new Discord.Client({
 const distube = new DisTube(client, {
   plugins: [
     new DirectLinkPlugin(),
-    new YtDlpPlugin({ update: true }),
     new SpotifyPlugin(),
     // TODO fix this
     new YouTubePlugin(),
     new SoundCloudPlugin(),
+    new YtDlpPlugin({ update: true }),
   ],
   nsfw: true,
 });
@@ -54,6 +55,11 @@ client.on("messageCreate", async (message) => {
 
     if (!message.member?.voice.channel) {
       throw new Error(`${message.author.username} is not on a voice channel`);
+    }
+
+    // @ts-expect-error checking coomand
+    if (COMMANDS.has(command)) {
+      // TODO leave
     }
     if (command === "play" || command === "p") {
       console.log("playing song");
@@ -112,9 +118,7 @@ client.on("messageCreate", async (message) => {
     }
 
     if (command === "leave") {
-      await distube.voices.get(message)?.leave();
-      //@ts-ignore
-      message.channel.send("Leaved the voice channel!");
+      leaveChannel(message);
       return;
     }
 
@@ -141,6 +145,18 @@ client.on("messageCreate", async (message) => {
     //@ts-expect-error
     await message.channel.send(error.message);
   }
+});
+
+function leaveChannel(
+  message: Discord.OmitPartialGroupDMChannel<Discord.Message<boolean>>
+) {
+  distube.voices.get(message)?.leave();
+  //@ts-ignore
+  message.channel.send("Leaved the voice channel!");
+}
+
+distube.on(Events.FFMPEG_DEBUG, (debug) => {
+  console.log(debug);
 });
 
 distube.on(Events.ERROR, (error) => {
