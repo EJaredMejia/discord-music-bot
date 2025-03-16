@@ -29,6 +29,9 @@ importers:
       '@distube/yt-dlp':
         specifier: ^2.0.1
         version: 2.0.1(distube@5.0.6(@discordjs/voice@0.18.0(@discordjs/opus@0.10.0)(ffmpeg-static@5.2.0))(discord.js@14.18.0))
+      '@distube/ytdl-core':
+        specifier: 4.15.9
+        version: 4.15.9
       discord.js:
         specifier: ^14.18.0
         version: 14.18.0
@@ -129,9 +132,10 @@ packages:
     peerDependencies:
       distube: '5'
 
-  '@distube/ytdl-core@4.16.4':
-    resolution: {integrity: sha512-r0ZPMMB5rbUSQSez//dYDWjPSAEOm6eeV+9gyR+1vngGYFUi953Z/CoF4epTBS40X8dR32gyH3ERlh7NbnCaRg==}
-    engines: {node: '>=20.18.1'}
+  '@distube/ytdl-core@4.15.9':
+    resolution: {integrity: sha512-8rFL1NAMsYz4t7Ryaz09Ld7VgoBurGB0KECG8BpTR2vikN0gD1VVusdfZqTYK/gp7uj/TbTJBa85oMCiVXvxcA==}
+    engines: {node: '>=14.0'}
+    deprecated: This version is deprecated, please upgrade to the latest version.
 
   '@distube/ytpl@1.2.1':
     resolution: {integrity: sha512-cp9nDYyGTZ2DNHURQXS76ptKWijLMspoxJEj03i++9tJf0LFGTWkskL3sLwcY4qQPLXjlH9FAXwwpjVttdXvZQ==}
@@ -794,9 +798,19 @@ packages:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
 
+  psl@1.15.0:
+    resolution: {integrity: sha512-JZd3gMVBAVQkSs6HdNZo9Sdo0LNcQeMNP3CozBJb3JYC/QUYZTnKxP+f8oWRX4rHP5EurWxqAHTSwUCjlNKa1w==}
+
+  punycode@2.3.1:
+    resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
+    engines: {node: '>=6'}
+
   qs@6.12.3:
     resolution: {integrity: sha512-AWJm14H1vVaO/iNZ4/hO+HyaTehuy9nRqVdkTqlJt0HWvBiBIEXFmb4C0DGeYo3Xes9rrEW+TxHsaigCbN5ICQ==}
     engines: {node: '>=0.6'}
+
+  querystringify@2.2.0:
+    resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
 
   read-pkg@3.0.0:
     resolution: {integrity: sha512-BLq/cCO9two+lBgiTYNqD6GdtK8s4NpaWrl6/rCO9w0TUS8oJl7cmToOZfRYllKTISY6nt1U7jQ53brmKqY6BA==}
@@ -813,6 +827,9 @@ packages:
   require-addon@1.1.0:
     resolution: {integrity: sha512-KbXAD5q2+v1GJnkzd8zzbOxchTkStSyJZ9QwoCq3QwEXAaIlG3wDYRZGzVD357jmwaGY7hr5VaoEAL0BkF0Kvg==}
     engines: {bare: '>=1.10.0'}
+
+  requires-port@1.0.0:
+    resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
 
   resolve@1.22.8:
     resolution: {integrity: sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==}
@@ -958,16 +975,9 @@ packages:
   tiny-typed-emitter@2.1.0:
     resolution: {integrity: sha512-qVtvMxeXbVej0cQWKqVSSAHmKZEHAvxdF8HEUBFWts8h+xEo5m/lEiPakuyZ3BnCBjOD8i24kzNOiOLLgsSxhA==}
 
-  tldts-core@6.1.82:
-    resolution: {integrity: sha512-Jabl32m21tt/d/PbDO88R43F8aY98Piiz6BVH9ShUlOAiiAELhEqwrAmBocjAqnCfoUeIsRU+h3IEzZd318F3w==}
-
-  tldts@6.1.82:
-    resolution: {integrity: sha512-KCTjNL9F7j8MzxgfTgjT+v21oYH38OidFty7dH00maWANAI2IsLw2AnThtTJi9HKALHZKQQWnNebYheadacD+g==}
-    hasBin: true
-
-  tough-cookie@5.1.2:
-    resolution: {integrity: sha512-FVDYdxtnj0G6Qm/DhNPSb8Ju59ULcup3tuJxkFb5K8Bv2pUXILbf0xZWU8PX8Ov19OXljbUyveOFwRMwkXzO+A==}
-    engines: {node: '>=16'}
+  tough-cookie@4.1.4:
+    resolution: {integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag==}
+    engines: {node: '>=6'}
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
@@ -1012,6 +1022,10 @@ packages:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
     engines: {node: '>=14.0'}
 
+  undici@5.28.5:
+    resolution: {integrity: sha512-zICwjrDrcrUE0pyyJc1I2QzBkLM8FINsgOrt6WjA+BgajVq9Nxu2PbFFXUrAggLfDXlZGZBVZYw7WNV5KiBiBA==}
+    engines: {node: '>=14.0'}
+
   undici@6.19.2:
     resolution: {integrity: sha512-JfjKqIauur3Q6biAtHJ564e3bWa8VvT+7cSiOJHFbX4Erv6CLGDpg8z+Fmg/1OI/47RA+GI2QZaF48SSaLvyBA==}
     engines: {node: '>=18.17'}
@@ -1020,9 +1034,12 @@ packages:
     resolution: {integrity: sha512-q/1rj5D0/zayJB2FraXdaWxbhWiNKDvu8naDT2dl1yTlvJp4BLtOcp2a5BvgGNQpYYJzau7tf1WgKv3b+7mqpQ==}
     engines: {node: '>=18.17'}
 
-  undici@7.4.0:
-    resolution: {integrity: sha512-PUQM3/es3noM24oUn10u3kNNap0AbxESOmnssmW+dOi9yGwlUSi5nTNYl3bNbTkWOF8YZDkx2tCmj9OtQ3iGGw==}
-    engines: {node: '>=20.18.1'}
+  universalify@0.2.0:
+    resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
+    engines: {node: '>= 4.0.0'}
+
+  url-parse@1.5.10:
+    resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -1184,7 +1201,7 @@ snapshots:
 
   '@distube/youtube@1.0.4(distube@5.0.6(@discordjs/voice@0.18.0(@discordjs/opus@0.10.0)(ffmpeg-static@5.2.0))(discord.js@14.18.0))':
     dependencies:
-      '@distube/ytdl-core': 4.16.4
+      '@distube/ytdl-core': 4.15.9
       '@distube/ytpl': 1.2.1
       '@distube/ytsr': 2.0.4
       distube: 5.0.6(@discordjs/voice@0.18.0(@discordjs/opus@0.10.0)(ffmpeg-static@5.2.0))(discord.js@14.18.0)
@@ -1197,15 +1214,15 @@ snapshots:
       distube: 5.0.6(@discordjs/voice@0.18.0(@discordjs/opus@0.10.0)(ffmpeg-static@5.2.0))(discord.js@14.18.0)
       undici: 6.21.1
 
-  '@distube/ytdl-core@4.16.4':
+  '@distube/ytdl-core@4.15.9':
     dependencies:
-      http-cookie-agent: 6.0.8(tough-cookie@5.1.2)(undici@7.4.0)
+      http-cookie-agent: 6.0.8(tough-cookie@4.1.4)(undici@5.28.5)
       https-proxy-agent: 7.0.6
       m3u8stream: 0.8.6
       miniget: 4.2.3
       sax: 1.4.1
-      tough-cookie: 5.1.2
-      undici: 7.4.0
+      tough-cookie: 4.1.4
+      undici: 5.28.5
     transitivePeerDependencies:
       - supports-color
 
@@ -1642,12 +1659,12 @@ snapshots:
 
   hosted-git-info@2.8.9: {}
 
-  http-cookie-agent@6.0.8(tough-cookie@5.1.2)(undici@7.4.0):
+  http-cookie-agent@6.0.8(tough-cookie@4.1.4)(undici@5.28.5):
     dependencies:
       agent-base: 7.1.3
-      tough-cookie: 5.1.2
+      tough-cookie: 4.1.4
     optionalDependencies:
-      undici: 7.4.0
+      undici: 5.28.5
 
   http-response-object@3.0.2:
     dependencies:
@@ -1895,9 +1912,17 @@ snapshots:
 
   progress@2.0.3: {}
 
+  psl@1.15.0:
+    dependencies:
+      punycode: 2.3.1
+
+  punycode@2.3.1: {}
+
   qs@6.12.3:
     dependencies:
       side-channel: 1.0.6
+
+  querystringify@2.2.0: {}
 
   read-pkg@3.0.0:
     dependencies:
@@ -1922,6 +1947,8 @@ snapshots:
     dependencies:
       bare-addon-resolve: 1.9.3(bare-url@2.1.3)
       bare-url: 2.1.3
+
+  requires-port@1.0.0: {}
 
   resolve@1.22.8:
     dependencies:
@@ -2101,15 +2128,12 @@ snapshots:
 
   tiny-typed-emitter@2.1.0: {}
 
-  tldts-core@6.1.82: {}
-
-  tldts@6.1.82:
+  tough-cookie@4.1.4:
     dependencies:
-      tldts-core: 6.1.82
-
-  tough-cookie@5.1.2:
-    dependencies:
-      tldts: 6.1.82
+      psl: 1.15.0
+      punycode: 2.3.1
+      universalify: 0.2.0
+      url-parse: 1.5.10
 
   tr46@0.0.3: {}
 
@@ -2166,11 +2190,20 @@ snapshots:
     dependencies:
       '@fastify/busboy': 2.1.1
 
+  undici@5.28.5:
+    dependencies:
+      '@fastify/busboy': 2.1.1
+
   undici@6.19.2: {}
 
   undici@6.21.1: {}
 
-  undici@7.4.0: {}
+  universalify@0.2.0: {}
+
+  url-parse@1.5.10:
+    dependencies:
+      querystringify: 2.2.0
+      requires-port: 1.0.0
 
   util-deprecate@1.0.2: {}
 
