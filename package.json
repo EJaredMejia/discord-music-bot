@@ -20,7 +20,7 @@
     "@distube/spotify": "^2.0.2",
     "@distube/youtube": "^1.0.4",
     "@distube/yt-dlp": "^2.0.1",
-    "@distube/ytdl-core": "4.15.9",
+    "@distube/ytdl-core": "4.16.8",
     "discord.js": "^14.18.0",
     "distube": "^5.0.6",
     "dotenv": "16.4.7",
