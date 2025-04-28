@@ -8,6 +8,7 @@ import * as dotenv from "dotenv";
 import { printHelp, printQueue, verifiyQueue } from "./functions";
 import { YouTubePlugin } from "@distube/youtube";
 import { COMMANDS } from "./const/commands";
+import DeezerPlugin from "@distube/deezer";
 
 dotenv.config();
 
@@ -24,10 +25,9 @@ const distube = new DisTube(client, {
   plugins: [
     new DirectLinkPlugin(),
     new SpotifyPlugin(),
-    // TODO fix this
+    new DeezerPlugin(),
     new YouTubePlugin(),
     new SoundCloudPlugin(),
-    new YtDlpPlugin({ update: true }),
   ],
   nsfw: true,
 });
