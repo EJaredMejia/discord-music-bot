@@ -23,11 +23,12 @@ const client = new Discord.Client({
 
 const distube = new DisTube(client, {
   plugins: [
-    new DirectLinkPlugin(),
+    // new DirectLinkPlugin(),
     new SpotifyPlugin(),
     new DeezerPlugin(),
-    new YouTubePlugin(),
+    // new YouTubePlugin(),
     new SoundCloudPlugin(),
+    new YtDlpPlugin()
   ],
   nsfw: true,
 });
