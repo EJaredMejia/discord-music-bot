@@ -28,3 +28,23 @@ export const printHelp = () => {
 !resume --- Resumes the song that was paused
 !stop --- The bot stop all features`;
 };
+
+export function cleanUrl(urlString: string) {
+  if (!urlString.includes("youtube.com")) {
+    return urlString;
+  }
+
+  try {
+    const url = new URL(urlString);
+
+    const videoId = url.searchParams.get("v") ?? "";
+    // Remove all query parameters
+    url.search = "";
+
+    const searchParams = new URLSearchParams([["v", videoId]]);
+
+    return `${url.toString()}?${searchParams.toString()}`;
+  } catch (err) {
+    return urlString;
+  }
+}

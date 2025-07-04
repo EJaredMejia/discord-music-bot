@@ -1,14 +1,12 @@
-import { DirectLinkPlugin } from "@distube/direct-link";
+import DeezerPlugin from "@distube/deezer";
 import SoundCloudPlugin from "@distube/soundcloud";
 import SpotifyPlugin from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
 import Discord from "discord.js";
-import { DisTube, Events } from "distube";
+import { DisTube, Events, ExtractorPlugin } from "distube";
 import * as dotenv from "dotenv";
-import { printHelp, printQueue, verifiyQueue } from "./functions";
-import { YouTubePlugin } from "@distube/youtube";
 import { COMMANDS } from "./const/commands";
-import DeezerPlugin from "@distube/deezer";
+import { cleanUrl, printHelp, printQueue, verifiyQueue } from "./functions";
 
 dotenv.config();
 
@@ -23,12 +21,14 @@ const client = new Discord.Client({
 
 const distube = new DisTube(client, {
   plugins: [
+    //@ts-ignore
+    new ExtractorPlugin(),
     // new DirectLinkPlugin(),
     new SpotifyPlugin(),
     new DeezerPlugin(),
     // new YouTubePlugin(),
     new SoundCloudPlugin(),
-    new YtDlpPlugin()
+    new YtDlpPlugin({ update: true }),
   ],
   nsfw: true,
 });
@@ -70,10 +70,14 @@ client.on("messageCreate", async (message) => {
         throw new Error("Empty text is not a valid song");
       }
 
-      await distube.play(message.member?.voice.channel, args.join(" "), {
-        message,
-        member: message.member,
-      });
+      await distube.play(
+        message.member?.voice.channel,
+        cleanUrl(args.join(" ")),
+        {
+          message,
+          member: message.member,
+        }
+      );
       return;
     }
 
