@@ -21,8 +21,8 @@ const client = new Discord.Client({
 
 const distube = new DisTube(client, {
   plugins: [
-    //@ts-ignore
-    new ExtractorPlugin(),
+    // //@ts-ignore
+    // new ExtractorPlugin(),
     // new DirectLinkPlugin(),
     new SpotifyPlugin(),
     new DeezerPlugin(),
