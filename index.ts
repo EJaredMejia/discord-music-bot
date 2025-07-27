@@ -3,10 +3,11 @@ import SoundCloudPlugin from "@distube/soundcloud";
 import SpotifyPlugin from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
 import Discord from "discord.js";
-import { DisTube, Events, ExtractorPlugin } from "distube";
+import { DisTube, Events } from "distube";
 import * as dotenv from "dotenv";
 import { COMMANDS } from "./const/commands";
 import { cleanUrl, printHelp, printQueue, verifiyQueue } from "./functions";
+import { DirectLinkPlugin } from "@distube/direct-link";
 
 dotenv.config();
 
@@ -21,9 +22,7 @@ const client = new Discord.Client({
 
 const distube = new DisTube(client, {
   plugins: [
-    // //@ts-ignore
-    // new ExtractorPlugin(),
-    // new DirectLinkPlugin(),
+    new DirectLinkPlugin(),
     new SpotifyPlugin(),
     new DeezerPlugin(),
     // new YouTubePlugin(),
